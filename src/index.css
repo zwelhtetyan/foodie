@@ -1,0 +1,35 @@
+/* width */
+::-webkit-scrollbar {
+    width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: rgb(31, 168, 13);
+    border-radius: 5px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: rgb(26, 141, 11);
+}
+
+body {
+    overflow: overlay;
+}
+
+.slick-dots {
+    margin-bottom: 2rem !important;
+}
+
+/* hide brand name on xs device */
+@media screen and (max-width: 350px) {
+    .brand_name {
+        display: none !important;
+    }
+}
