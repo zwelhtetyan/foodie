@@ -1,4 +1,4 @@
-import { Button, Flex, Text, VStack } from '@chakra-ui/react';
+import { Box, Button, Flex, Text, VStack } from '@chakra-ui/react';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import useSkeleton from '../../hooks/useSkeleton';
@@ -65,7 +65,7 @@ const Products = () => {
     const { productSkeletonArr } = useSkeleton(fetchingStatus.skeletonsToShow);
 
     return (
-        <>
+        <Box maxWidth={'1200px'} m='auto'>
             {errorContent}
             {products && !fetchingStatus.loading && (
                 <>
@@ -80,7 +80,7 @@ const Products = () => {
                     {productSkeletonArr}
                 </Flex>
             )}
-        </>
+        </Box>
     );
 };
 

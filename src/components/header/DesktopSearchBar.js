@@ -1,26 +1,16 @@
 import { Input } from '@chakra-ui/react';
 import { useRef } from 'react';
-import { useDispatch } from 'react-redux';
 import { useAppContext } from '../../context/AppCtx';
-import { searchProductSliceAction } from '../../store/search-product';
+import useSearchProduct from '../../hooks/useSearchProduct';
 
 const DesktopSearchBar = () => {
     const { showDesktopSearchBar } = useAppContext();
-
-    const dispatch = useDispatch();
 
     const searchInputRef = useRef();
 
     showDesktopSearchBar && searchInputRef.current.focus();
 
-    const searchProductHandler = (e) => {
-        e.preventDefault();
-        const searchTerm = searchInputRef.current.value;
-        searchInputRef.current.blur(); // showing of mobile keyboard when submit
-        dispatch(searchProductSliceAction.setSearchTerm(searchTerm));
-        dispatch(searchProductSliceAction.setIsSearch(true));
-        searchInputRef.current.value = '';
-    };
+    const { searchProductHandler } = useSearchProduct(searchInputRef);
 
     return (
         <form onSubmit={searchProductHandler}>

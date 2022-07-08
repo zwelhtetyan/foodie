@@ -1,11 +1,12 @@
 import React, { useEffect } from 'react';
 import Header from './components/header/Header';
 import { Box } from '@chakra-ui/react';
-import HeroSlider from './components/carousel/Carousel';
 import { useDispatch } from 'react-redux';
 import fetchProductData from './store/products-action';
-import Products from './components/products/Products';
 import SearchedProducts from './components/products/SearchedProducts';
+import { Route, Routes } from 'react-router-dom';
+import ProductDetail from './components/products/productDetail/ProductDetail';
+import Home from './pages/Home';
 
 const App = () => {
     const dispatch = useDispatch();
@@ -15,11 +16,13 @@ const App = () => {
     }, [dispatch]);
 
     return (
-        <Box maxWidth={'2400px'} m='auto'>
+        <Box>
             <Header />
-            <HeroSlider />
-            <Products />
             <SearchedProducts />
+            <Routes>
+                <Route path='/' element={<Home />} />
+                <Route path='products/:id' element={<ProductDetail />} />
+            </Routes>
         </Box>
     );
 };

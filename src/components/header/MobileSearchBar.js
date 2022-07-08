@@ -1,25 +1,16 @@
 import React, { useRef } from 'react';
 import { Input, VStack } from '@chakra-ui/react';
-import { searchProductSliceAction } from '../../store/search-product';
-import { useDispatch } from 'react-redux';
 import { useAppContext } from '../../context/AppCtx';
+import useSearchProduct from '../../hooks/useSearchProduct';
 
 const MobileSearchBar = () => {
     const { showMobileSearchBar } = useAppContext();
 
-    const dispatch = useDispatch();
     const searchInputRef = useRef();
 
     showMobileSearchBar && searchInputRef.current.focus();
 
-    const searchProductHandler = (e) => {
-        e.preventDefault();
-        const searchTerm = searchInputRef.current.value;
-        searchInputRef.current.blur(); // showing of mobile keyboard when submit
-        dispatch(searchProductSliceAction.setSearchTerm(searchTerm));
-        dispatch(searchProductSliceAction.setIsSearch(true));
-        searchInputRef.current.value = '';
-    };
+    const { searchProductHandler } = useSearchProduct(searchInputRef);
 
     return (
         <VStack
@@ -27,8 +18,9 @@ const MobileSearchBar = () => {
             backgroundColor='blackAlpha.800'
             backdropFilter={'blur(5px)'}
             color='white'
+            transition={'.2s'}
             top={showMobileSearchBar ? '65px' : 0}
-            zIndex={showMobileSearchBar ? 1 : -1}
+            zIndex={showMobileSearchBar ? 2 : -1}
             left={0}
             width='100%'
             height={'50px'}

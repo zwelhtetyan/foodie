@@ -6,16 +6,19 @@ import App from './App';
 import { Provider } from 'react-redux';
 import store from './store';
 import AppContextProvider from './context/AppCtx';
+import { BrowserRouter } from 'react-router-dom';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     <React.StrictMode>
-        <Provider store={store}>
-            <AppContextProvider>
-                <ChakraProvider>
-                    <App />
-                </ChakraProvider>
-            </AppContextProvider>
-        </Provider>
+        <BrowserRouter>
+            <Provider store={store}>
+                <AppContextProvider>
+                    <ChakraProvider>
+                        <App />
+                    </ChakraProvider>
+                </AppContextProvider>
+            </Provider>
+        </BrowserRouter>
     </React.StrictMode>
 );

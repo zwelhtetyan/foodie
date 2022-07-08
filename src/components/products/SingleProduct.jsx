@@ -1,16 +1,13 @@
 import { Badge, Button, Flex, Image, Text, VStack } from '@chakra-ui/react';
 import React from 'react';
 import { FiHeart } from 'react-icons/fi';
+import { Link } from 'react-router-dom';
+import { cartIconBtnProp } from '../../utilities/cartIconBtnProp';
+import { hoverBtnProp } from '../../utilities/hoverBtnProp';
 
-const SingleProduct = ({ id, image, title, price, rating }) => {
+const SingleProduct = ({ id, image, title, price, rating, onClose }) => {
     //cuz title is so fucking long , i can't feel it :)
     const titleShoter = (title) => title.split(' ').slice(0, 2).join(' ');
-
-    const btnHover = {
-        border: '1px solid black',
-        bg: 'black',
-        color: 'white',
-    };
 
     return (
         <VStack
@@ -24,12 +21,15 @@ const SingleProduct = ({ id, image, title, price, rating }) => {
             p={['2', '3']}
             boxShadow={'lg'}
         >
-            <Image
-                src={image}
-                alt='product_img'
-                w={['100px', '120px']}
-                height={['100px', '150px']}
-            />
+            <Link to={`products/${id}`} onClick={onClose}>
+                <Image
+                    src={image}
+                    alt='product_img'
+                    w={['100px', '120px']}
+                    height={['100px', '150px']}
+                    cursor='pointer'
+                />
+            </Link>
             <Text fontSize={'md'} fontWeight='bold' textAlign={'center'}>
                 {titleShoter(title)}
             </Text>
@@ -43,21 +43,17 @@ const SingleProduct = ({ id, image, title, price, rating }) => {
             <Badge
                 bg={'black'}
                 color='white'
-                rounded='5'
+                rounded={'sm'}
                 textTransform={'capitalize'}
                 p={1}
+                px={2}
             >
                 Rating : {rating.rate}
             </Badge>
             <Flex alignItems='center' justifyContent={'space-between'} w='100%'>
                 <Button
-                    colorScheme='dark'
-                    variant='outline'
-                    // _hover={{ bg: 'gray.200' }}
-                    _hover={btnHover}
-                    p={0}
-                    border={'1px'}
-                    rounded={0}
+                    sx={cartIconBtnProp}
+                    _hover={hoverBtnProp}
                     // isLoading={true}
                 >
                     <FiHeart size={20} />
@@ -66,12 +62,10 @@ const SingleProduct = ({ id, image, title, price, rating }) => {
                     // isLoading={true}
                     // loadingText={'Loading'}
                     // spinnerPlacement='end'
-                    colorScheme='dark'
-                    rounded={0}
+                    sx={cartIconBtnProp}
                     width='100%'
-                    _hover={btnHover}
-                    variant='outline'
-                    borderLeft={'none'}
+                    _hover={hoverBtnProp}
+                    borderLeft={'none !important'}
                     fontWeight={'sm'}
                     fontSize={'md'}
                     color='black'

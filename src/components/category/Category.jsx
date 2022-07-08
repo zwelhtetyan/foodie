@@ -1,13 +1,14 @@
 import { Box, Flex, Text } from '@chakra-ui/react';
 import React from 'react';
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { productUISliceAction } from '../../store/products-ui';
 import { categories } from './categroy-list';
 
 const Category = () => {
     const [categoryList, setCategoryList] = useState(categories);
     const dispatch = useDispatch();
+    const { ctegType } = useSelector((state) => state.productUI);
 
     const properties = {
         cursor: 'pointer',
@@ -45,7 +46,10 @@ const Category = () => {
                     : { base: '50%', md: '20%' }
             }
             height={{ base: '60px', sm: '100px' }}
-            sx={item.active && activeState}
+            sx={
+                item.content.toLowerCase() === ctegType.toLowerCase() &&
+                activeState
+            }
             {...properties}
             key={item.id}
             _hover={{

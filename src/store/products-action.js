@@ -15,7 +15,12 @@ const fetchProductData = () => {
 
             const data = await response.json();
 
-            dispatch(productUISliceAction.setProducts(data));
+            const transformData = data.map((item) => ({
+                ...item,
+                quantity: 1,
+            }));
+
+            dispatch(productUISliceAction.setProducts(transformData));
             dispatch(productUISliceAction.setLoading(false));
         };
 
