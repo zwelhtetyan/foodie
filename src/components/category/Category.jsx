@@ -54,8 +54,12 @@ const Category = () => {
             key={item.id}
             _hover={{
                 bg: {
-                    base: !item.active && 'transparent',
-                    sm: !item.active && 'gray.200',
+                    base:
+                        item.content.toLowerCase() !== ctegType.toLowerCase() &&
+                        'transparent',
+                    sm:
+                        item.content.toLowerCase() !== ctegType.toLowerCase() &&
+                        'gray.200',
                 },
             }}
             onClick={cateGoryClickHandler.bind(null, item.id, item.content)}

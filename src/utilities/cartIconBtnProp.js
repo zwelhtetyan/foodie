@@ -1,6 +1,5 @@
 export const cartIconBtnProp = {
-    colorScheme: 'dark',
-    variant: 'outline',
+    bg: '#edf2f7de',
     p: 0,
     border: '1px',
     rounded: 0,

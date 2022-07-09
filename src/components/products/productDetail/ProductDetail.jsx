@@ -1,23 +1,29 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Badge, Box, Flex, Image, Text, VStack } from '@chakra-ui/react';
 import { useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import AccordionContainer from './Accordion';
 import Buttons from './Buttons';
 import BackBtn from '../../../utilities/BackBtn';
+import { titleShorter } from '../../../utilities/titleShorter';
 
 const ProductDetail = () => {
-    const { id } = useParams();
+    const { _id } = useParams();
     const navigate = useNavigate();
 
     const { products } = useSelector((state) => state.productUI);
 
-    const findProduct = products?.filter((item) => item.id === +id);
+    const findProduct = products?.find((item) => item.id === +_id);
 
-    const productToShow = findProduct && findProduct[0];
+    const productToShow = findProduct && findProduct;
 
-    //cuz title is so fucking long , i can't feel it :)
-    const titleShoter = (title) => title.split(' ').slice(0, 5).join(' ');
+    const newItem = {
+        id: productToShow?.id,
+        title: productToShow?.title,
+        image: productToShow?.image,
+        price: productToShow?.price,
+        totalPrice: productToShow?.price,
+    };
 
     //when this component mount
     window.scrollTo(0, 0);
@@ -25,13 +31,7 @@ const ProductDetail = () => {
     return (
         <>
             {productToShow && (
-                <Box
-                    margin={'auto'}
-                    mt='65px'
-                    height={{ base: 'auto', md: 'calc(100vh - 65px)' }}
-                    px={5}
-                    maxWidth='1200px'
-                >
+                <Box margin={'auto'} mt='65px' px={5} maxWidth='1000px'>
                     <Box marginTop={'6rem !important'}>
                         <BackBtn onBack={() => navigate(-1)} />
                     </Box>
@@ -55,11 +55,11 @@ const ProductDetail = () => {
                             mt={{ base: '2.5rem', md: '0' }}
                         >
                             <Text fontSize={'2xl'} fontWeight='bold'>
-                                {titleShoter(productToShow.title)}
+                                {titleShorter(productToShow.title, 3)}
                             </Text>
                             <Flex align={'center'}>
                                 <Text me={'2rem'} fontSize='lg'>
-                                    Price: ${productToShow.price}
+                                    Price: ${productToShow.price.toFixed(2)}
                                 </Text>
                                 <Badge
                                     variant='solid'
@@ -82,7 +82,7 @@ const ProductDetail = () => {
                                 description={productToShow.description}
                             />
 
-                            <Buttons quantity={productToShow.quantity} />
+                            <Buttons newItem={newItem} />
                         </VStack>
                     </Flex>
                 </Box>

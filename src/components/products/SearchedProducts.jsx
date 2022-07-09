@@ -1,27 +1,18 @@
 import { Box, Flex, Heading, Text } from '@chakra-ui/react';
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import SingleProduct from './SingleProduct';
 import { IoCloseOutline } from 'react-icons/io5';
-import { searchProductSliceAction } from '../../store/search-product';
-import { useAppContext } from '../../context/AppCtx';
+
+import useCloseSearch from '../../hooks/useCloseSearch';
 
 const SearchedProducts = () => {
     const { products } = useSelector((state) => state.productUI);
-    const dispatch = useDispatch();
     const { isSearch, searchTerm } = useSelector(
         (state) => state.searchProduct
     );
 
-    const { setShowDesktopSearchBar, setShowMobileSearchBar } = useAppContext();
-
-    //handle close
-    const handleClose = () => {
-        dispatch(searchProductSliceAction.setIsSearch(false));
-        window.innerWidth > 992
-            ? setShowDesktopSearchBar(false)
-            : setShowMobileSearchBar(false);
-    };
+    const handleClose = useCloseSearch();
 
     const displayProducts = () => {
         const filteredProducts = products?.filter((item) =>
@@ -81,8 +72,8 @@ const SearchedProducts = () => {
                     letterSpacing={1}
                     mt={5}
                 >
-                    {searchedProducts ? 'Results' : 'No result'} for{' '}
-                    <b> {searchTerm}</b> {searchedProducts ? '.' : '!'}
+                    {searchedProducts ? 'Search Results' : 'No result for'}:{' '}
+                    <b>"{searchTerm}"</b> {searchedProducts ? '' : '!'}
                 </Text>
 
                 <Flex flexWrap={'wrap'} py={5} my={5}>

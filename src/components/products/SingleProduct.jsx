@@ -1,13 +1,36 @@
 import { Badge, Button, Flex, Image, Text, VStack } from '@chakra-ui/react';
 import React from 'react';
 import { FiHeart } from 'react-icons/fi';
+import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { cartSliceAction } from '../../store/cart-slice';
 import { cartIconBtnProp } from '../../utilities/cartIconBtnProp';
 import { hoverBtnProp } from '../../utilities/hoverBtnProp';
+import { titleShorter } from '../../utilities/titleShorter';
 
-const SingleProduct = ({ id, image, title, price, rating, onClose }) => {
-    //cuz title is so fucking long , i can't feel it :)
-    const titleShoter = (title) => title.split(' ').slice(0, 2).join(' ');
+const SingleProduct = ({
+    id,
+    image,
+    title,
+    price,
+    rating,
+    onClose,
+    quantity,
+}) => {
+    const dispatch = useDispatch();
+
+    const addToCartHandler = () => {
+        dispatch(
+            cartSliceAction.addToCart({
+                id,
+                title,
+                image,
+                price,
+                quantity,
+                totalPrice: price,
+            })
+        );
+    };
 
     return (
         <VStack
@@ -28,10 +51,12 @@ const SingleProduct = ({ id, image, title, price, rating, onClose }) => {
                     w={['100px', '120px']}
                     height={['100px', '150px']}
                     cursor='pointer'
+                    _hover={{ transform: 'scale(0.91)' }}
+                    transition='.3s'
                 />
             </Link>
             <Text fontSize={'md'} fontWeight='bold' textAlign={'center'}>
-                {titleShoter(title)}
+                {titleShorter(title, 2)}
             </Text>
 
             <Text sx={{ marginTop: '0 !important' }}>
@@ -63,12 +88,12 @@ const SingleProduct = ({ id, image, title, price, rating, onClose }) => {
                     // loadingText={'Loading'}
                     // spinnerPlacement='end'
                     sx={cartIconBtnProp}
-                    width='100%'
                     _hover={hoverBtnProp}
+                    width='100%'
                     borderLeft={'none !important'}
                     fontWeight={'sm'}
                     fontSize={'md'}
-                    color='black'
+                    onClick={addToCartHandler}
                 >
                     Add to cart
                 </Button>

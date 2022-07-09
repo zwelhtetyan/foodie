@@ -8,12 +8,22 @@ import UserAvatar from './Avatar';
 import DesktopSearchBar from './DesktopSearchBar';
 import MobileSearchBar from './MobileSearchBar';
 import { useAppContext } from '../../context/AppCtx';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import NotiBadge from '../../utilities/NotiBadge';
+import useCloseSearch from '../../hooks/useCloseSearch';
+import { useSelector } from 'react-redux';
 
 const Header = () => {
     const { showSearchBarHandler } = useAppContext();
+    const { cartItems } = useSelector((state) => state.cart);
+    const handleClose = useCloseSearch();
 
     const navigate = useNavigate();
+
+    const totalAmount = cartItems.reduce(
+        (amount, item) => amount + item.quantity,
+        0
+    );
 
     return (
         <>
@@ -61,12 +71,19 @@ const Header = () => {
                         >
                             <BsSearch size={20} cursor={'pointer'} />
                         </Box>
-                        <Box ms={['1.5rem', '2rem']}>
+                        <Box ms={['1.5rem', '2rem']} pos='relative'>
                             <FiHeart size={22} cursor={'pointer'} />
+                            <NotiBadge val='1' className='whishlistNotiBadge' />
                         </Box>
-                        <Box ms={['1.5rem', '2rem']}>
-                            <BsCartDash size={22} cursor={'pointer'} />
-                        </Box>
+                        <Link to='/cart' onClick={handleClose}>
+                            <Box ms={['1.5rem', '2rem']} pos='relative'>
+                                <BsCartDash size={22} cursor={'pointer'} />
+                                <NotiBadge
+                                    val={totalAmount > 0 ? totalAmount : ''}
+                                    className='cartNotiBadge'
+                                />
+                            </Box>
+                        </Link>
                         <UserAvatar />
                     </Flex>
                 </Flex>

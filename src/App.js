@@ -7,6 +7,7 @@ import SearchedProducts from './components/products/SearchedProducts';
 import { Route, Routes } from 'react-router-dom';
 import ProductDetail from './components/products/productDetail/ProductDetail';
 import Home from './pages/Home';
+import Cart from './components/cart/Cart';
 
 const App = () => {
     const dispatch = useDispatch();
@@ -21,7 +22,8 @@ const App = () => {
             <SearchedProducts />
             <Routes>
                 <Route path='/' element={<Home />} />
-                <Route path='products/:id' element={<ProductDetail />} />
+                <Route path='products/:_id' element={<ProductDetail />} />
+                <Route path='/cart' element={<Cart />} />
             </Routes>
         </Box>
     );
