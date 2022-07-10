@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Box, Button, Text } from '@chakra-ui/react';
 import BackBtn from '../../utilities/BackBtn';
 import { useNavigate } from 'react-router-dom';

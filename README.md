@@ -1,3 +1,5 @@
+I inspired slide photo and some layout design from 'https://haru-fashion.vercel.app/' and code my own.
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

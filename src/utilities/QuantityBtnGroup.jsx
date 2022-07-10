@@ -9,11 +9,13 @@ import { hoverBtnProp } from './hoverBtnProp';
 const QuantityBtnGroup = ({ id, quantity }) => {
     const dispatch = useDispatch();
 
-    const addQuantityHandler = () => {
+    const addQuantityHandler = (e) => {
+        e.stopPropagation();
         dispatch(cartSliceAction.addQuantity(id));
     };
 
-    const removeQuantityHandler = () => {
+    const removeQuantityHandler = (e) => {
+        e.stopPropagation();
         dispatch(cartSliceAction.removeQuantity(id));
     };
 

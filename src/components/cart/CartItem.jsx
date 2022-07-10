@@ -9,6 +9,7 @@ import {
 } from '@chakra-ui/react';
 import React, { useState } from 'react';
 import { IoCloseOutline } from 'react-icons/io5';
+import { useNavigate } from 'react-router-dom';
 import useProductConflix from '../../hooks/useProductConflix';
 import { cartIconBtnProp } from '../../utilities/cartIconBtnProp';
 import { hoverBtnProp } from '../../utilities/hoverBtnProp';
@@ -31,6 +32,18 @@ const CartItem = ({
 
     const leave = () => setHover(false);
 
+    const navigate = useNavigate();
+
+    const clickItemHandler = (e) => {
+        e.stopPropagation();
+        navigate(`/products/${id}`);
+    };
+
+    const removeItemHandler = (e) => {
+        e.stopPropagation();
+        removeItem(id);
+    };
+
     const { addToCartHandler } = useProductConflix({
         id,
         title,
@@ -40,6 +53,11 @@ const CartItem = ({
         totalPrice,
     });
 
+    const addToCart = (e) => {
+        e.stopPropagation();
+        addToCartHandler();
+    };
+
     return (
         <Box
             pos='relative'
@@ -48,6 +66,9 @@ const CartItem = ({
             rounded='sm'
             borderBottom='1px'
             borderColor='gray.200'
+            transition='.2s'
+            _hover={{ bg: 'gray.100' }}
+            onClick={clickItemHandler}
         >
             <HStack justify='space-between' mt={4}>
                 <Text width='70%' me={'2rem'} fontWeight='600'>
@@ -74,7 +95,7 @@ const CartItem = ({
                     right='2px'
                     onMouseEnter={enter}
                     onMouseLeave={leave}
-                    onClick={() => removeItem(id)}
+                    onClick={removeItemHandler}
                 >
                     <IoCloseOutline
                         size={30}
@@ -96,7 +117,7 @@ const CartItem = ({
                             fontWeight={'sm'}
                             fontSize={'md'}
                             width='120px'
-                            onClick={addToCartHandler}
+                            onClick={addToCart}
                         >
                             Add to cart
                         </Button>

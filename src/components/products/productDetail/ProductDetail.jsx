@@ -9,6 +9,7 @@ import { titleShorter } from '../../../utilities/titleShorter';
 import useSkeleton from '../../../hooks/useSkeleton';
 
 const ProductDetail = () => {
+    const { products } = useSelector((state) => state.productUI);
     const { wishlist } = useSelector((state) => state.wishList);
     const { _id } = useParams();
     const navigate = useNavigate();
@@ -18,8 +19,6 @@ const ProductDetail = () => {
 
     // isWishlist
     const isWishlist = (id) => wishlist.some((item) => item.id === id);
-
-    const { products } = useSelector((state) => state.productUI);
 
     const findProduct = products?.find((item) => item.id === +_id);
 
