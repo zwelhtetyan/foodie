@@ -1,21 +1,44 @@
-import { Flex, VStack, Image, Text, Box, HStack } from '@chakra-ui/react';
+import {
+    Flex,
+    VStack,
+    Image,
+    Text,
+    Box,
+    HStack,
+    Button,
+} from '@chakra-ui/react';
 import React, { useState } from 'react';
 import { IoCloseOutline } from 'react-icons/io5';
-import { useDispatch } from 'react-redux';
-import { cartSliceAction } from '../../store/cart-slice';
+import useProductConflix from '../../hooks/useProductConflix';
+import { cartIconBtnProp } from '../../utilities/cartIconBtnProp';
+import { hoverBtnProp } from '../../utilities/hoverBtnProp';
 import QuantityBtnGroup from '../../utilities/QuantityBtnGroup';
 import { titleShorter } from '../../utilities/titleShorter';
 
-const CartItem = ({ id, title, price, image, totalPrice, quantity }) => {
+const CartItem = ({
+    id,
+    title,
+    price,
+    image,
+    totalPrice,
+    quantity,
+    isWishlist,
+    removeItem,
+}) => {
     const [hover, setHover] = useState(false);
-    const dispatch = useDispatch();
 
     const enter = () => setHover(true);
 
     const leave = () => setHover(false);
 
-    const removeFromCartHandler = () =>
-        dispatch(cartSliceAction.removeFromCart(id));
+    const { addToCartHandler } = useProductConflix({
+        id,
+        title,
+        price,
+        image,
+        quantity,
+        totalPrice,
+    });
 
     return (
         <Box
@@ -31,10 +54,16 @@ const CartItem = ({ id, title, price, image, totalPrice, quantity }) => {
                     {titleShorter(title, 2)}
                 </Text>
                 <VStack width='30%' pe='2rem'>
-                    <Text>${totalPrice.toFixed(2)}</Text>
-                    <Text mt='-3px !important' fontSize='13px'>
-                        (${price.toFixed(2)})
-                    </Text>
+                    {isWishlist ? (
+                        <Text>${price.toFixed(2)}</Text>
+                    ) : (
+                        <>
+                            <Text>${totalPrice.toFixed(2)}</Text>
+                            <Text mt='-3px !important' fontSize='13px'>
+                                (${price.toFixed(2)})
+                            </Text>
+                        </>
+                    )}
                 </VStack>
             </HStack>
 
@@ -45,7 +74,7 @@ const CartItem = ({ id, title, price, image, totalPrice, quantity }) => {
                     right='2px'
                     onMouseEnter={enter}
                     onMouseLeave={leave}
-                    onClick={removeFromCartHandler}
+                    onClick={() => removeItem(id)}
                 >
                     <IoCloseOutline
                         size={30}
@@ -56,9 +85,27 @@ const CartItem = ({ id, title, price, image, totalPrice, quantity }) => {
 
                 <Image src={image} width={70} height={70} />
 
-                <VStack>
-                    <QuantityBtnGroup id={id} quantity={quantity} />
-                </VStack>
+                {isWishlist ? (
+                    <Box>
+                        <Button
+                            // isLoading={true}
+                            // loadingText={'Loading'}
+                            // spinnerPlacement='end'
+                            sx={cartIconBtnProp}
+                            _hover={hoverBtnProp}
+                            fontWeight={'sm'}
+                            fontSize={'md'}
+                            width='120px'
+                            onClick={addToCartHandler}
+                        >
+                            Add to cart
+                        </Button>
+                    </Box>
+                ) : (
+                    <VStack>
+                        <QuantityBtnGroup id={id} quantity={quantity} />
+                    </VStack>
+                )}
             </Flex>
         </Box>
     );

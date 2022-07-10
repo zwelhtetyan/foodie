@@ -14,8 +14,16 @@ const Cart = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
+    const removeFromCartHandler = (id) =>
+        dispatch(cartSliceAction.removeFromCart(id));
+
     const displayCartItems = cartItems.map((item) => (
-        <CartItem {...item} key={item.id} />
+        <CartItem
+            {...item}
+            key={item.id}
+            isWishlist={false}
+            removeItem={removeFromCartHandler}
+        />
     ));
 
     const cartItemSection =
@@ -32,7 +40,9 @@ const Cart = () => {
         0
     );
 
-    const clearCartHandler = () => dispatch(cartSliceAction.clearCart());
+    const clearCartHandler = () => {
+        dispatch(cartSliceAction.clearCart());
+    };
 
     const cartFooter = (
         <>
@@ -59,7 +69,7 @@ const Cart = () => {
     }, [loacation]);
 
     return (
-        <Box mt='65px' px={5} maxWidth='1200px' m='auto'>
+        <Box px={5} maxWidth='1200px' m='auto' mt='65px'>
             <Box
                 marginTop={'6rem !important'}
                 mb='2rem'

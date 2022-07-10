@@ -12,6 +12,9 @@ const Products = () => {
         (state) => state.productUI
     );
 
+    const cartItems = useSelector((state) => state.cart.cartItems);
+    const wishlists = useSelector((state) => state.wishList.wishlist);
+
     let categotyType = ctegType.toLowerCase();
 
     // eslint-disable-next-line array-callback-return
@@ -36,7 +39,12 @@ const Products = () => {
     const displayProducts = (
         <>
             {productsToDisplay?.map((item) => (
-                <SingleProduct {...item} key={item.id} />
+                <SingleProduct
+                    {...item}
+                    key={item.id}
+                    wishlists={wishlists}
+                    cartItems={cartItems}
+                />
             ))}
         </>
     );

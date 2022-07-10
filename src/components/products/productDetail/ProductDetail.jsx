@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Badge, Box, Flex, Image, Text, VStack } from '@chakra-ui/react';
 import { useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -6,10 +6,18 @@ import AccordionContainer from './Accordion';
 import Buttons from './Buttons';
 import BackBtn from '../../../utilities/BackBtn';
 import { titleShorter } from '../../../utilities/titleShorter';
+import useSkeleton from '../../../hooks/useSkeleton';
 
 const ProductDetail = () => {
+    const { wishlist } = useSelector((state) => state.wishList);
     const { _id } = useParams();
     const navigate = useNavigate();
+
+    // skeleton
+    const { productDetailSkeleton } = useSkeleton();
+
+    // isWishlist
+    const isWishlist = (id) => wishlist.some((item) => item.id === id);
 
     const { products } = useSelector((state) => state.productUI);
 
@@ -22,7 +30,6 @@ const ProductDetail = () => {
         title: productToShow?.title,
         image: productToShow?.image,
         price: productToShow?.price,
-        totalPrice: productToShow?.price,
     };
 
     //when this component mount
@@ -30,6 +37,7 @@ const ProductDetail = () => {
 
     return (
         <>
+            {!productToShow && productDetailSkeleton}
             {productToShow && (
                 <Box margin={'auto'} mt='65px' px={5} maxWidth='1000px'>
                     <Box marginTop={'6rem !important'}>
@@ -49,6 +57,7 @@ const ProductDetail = () => {
                         >
                             <Image src={productToShow.image} width='60%' />
                         </Flex>
+
                         <VStack
                             width={{ base: '100%', md: '50%' }}
                             align='start'
@@ -57,6 +66,7 @@ const ProductDetail = () => {
                             <Text fontSize={'2xl'} fontWeight='bold'>
                                 {titleShorter(productToShow.title, 3)}
                             </Text>
+
                             <Flex align={'center'}>
                                 <Text me={'2rem'} fontSize='lg'>
                                     Price: ${productToShow.price.toFixed(2)}
@@ -82,7 +92,10 @@ const ProductDetail = () => {
                                 description={productToShow.description}
                             />
 
-                            <Buttons newItem={newItem} />
+                            <Buttons
+                                newItem={newItem}
+                                isWishlist={isWishlist}
+                            />
                         </VStack>
                     </Flex>
                 </Box>

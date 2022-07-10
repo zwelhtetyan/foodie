@@ -12,6 +12,9 @@ const SearchedProducts = () => {
         (state) => state.searchProduct
     );
 
+    const cartItems = useSelector((state) => state.cart.cartItems);
+    const wishlists = useSelector((state) => state.wishList.wishlist);
+
     const handleClose = useCloseSearch();
 
     const displayProducts = () => {
@@ -20,23 +23,28 @@ const SearchedProducts = () => {
         );
 
         return filteredProducts?.map((item) => (
-            <SingleProduct {...item} key={item.id} onClose={handleClose} />
+            <SingleProduct
+                {...item}
+                key={item.id}
+                onClose={handleClose}
+                wishlists={wishlists}
+                cartItems={cartItems}
+            />
         ));
     };
 
     const searchedProducts =
         displayProducts()?.length !== 0 ? displayProducts() : null;
 
-    //handling duplicated scroll bar
+    // handling duplicated scroll bar
     if (isSearch) {
         document.body.style.overflow = 'hidden';
     } else {
         document.body.style.overflow = 'auto';
     }
 
-    return (
+    const showSearchedProducts = (
         <Box
-            display={isSearch ? 'block' : 'none'}
             width={'100%'}
             height={'calc(100vh - 65px)'}
             bg='white'
@@ -82,6 +90,8 @@ const SearchedProducts = () => {
             </Box>
         </Box>
     );
+
+    return <>{isSearch && showSearchedProducts}</>;
 };
 
 export default SearchedProducts;

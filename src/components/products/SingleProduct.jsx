@@ -1,12 +1,12 @@
 import { Badge, Button, Flex, Image, Text, VStack } from '@chakra-ui/react';
 import React from 'react';
 import { FiHeart } from 'react-icons/fi';
-import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { cartSliceAction } from '../../store/cart-slice';
 import { cartIconBtnProp } from '../../utilities/cartIconBtnProp';
 import { hoverBtnProp } from '../../utilities/hoverBtnProp';
 import { titleShorter } from '../../utilities/titleShorter';
+import { FaHeart } from 'react-icons/fa';
+import useProductConflix from '../../hooks/useProductConflix';
 
 const SingleProduct = ({
     id,
@@ -16,21 +16,22 @@ const SingleProduct = ({
     rating,
     onClose,
     quantity,
+    wishlists,
+    cartItems,
 }) => {
-    const dispatch = useDispatch();
+    const isWishlist = (id) => wishlists.some((item) => item.id === id);
 
-    const addToCartHandler = () => {
-        dispatch(
-            cartSliceAction.addToCart({
-                id,
-                title,
-                image,
-                price,
-                quantity,
-                totalPrice: price,
-            })
-        );
+    const newItem = {
+        id,
+        title,
+        image,
+        price,
+        quantity,
+        totalPrice: price,
     };
+
+    const { addToCartHandler, addToWishListHandler } =
+        useProductConflix(newItem);
 
     return (
         <VStack
@@ -77,18 +78,23 @@ const SingleProduct = ({
             </Badge>
             <Flex alignItems='center' justifyContent={'space-between'} w='100%'>
                 <Button
-                    sx={cartIconBtnProp}
-                    _hover={hoverBtnProp}
                     // isLoading={true}
+                    sx={cartIconBtnProp}
+                    _hover={{ md: hoverBtnProp }}
+                    onClick={addToWishListHandler}
                 >
-                    <FiHeart size={20} />
+                    {isWishlist(id) ? (
+                        <FaHeart size={20} />
+                    ) : (
+                        <FiHeart size={20} />
+                    )}
                 </Button>
                 <Button
                     // isLoading={true}
                     // loadingText={'Loading'}
                     // spinnerPlacement='end'
                     sx={cartIconBtnProp}
-                    _hover={hoverBtnProp}
+                    _hover={{ md: hoverBtnProp }}
                     width='100%'
                     borderLeft={'none !important'}
                     fontWeight={'sm'}

@@ -8,6 +8,8 @@ import { Route, Routes } from 'react-router-dom';
 import ProductDetail from './components/products/productDetail/ProductDetail';
 import Home from './pages/Home';
 import Cart from './components/cart/Cart';
+import Wishlist from './components/wishlist/Wishlist';
+import ModalElement from './components/modal/Modal';
 
 const App = () => {
     const dispatch = useDispatch();
@@ -24,7 +26,9 @@ const App = () => {
                 <Route path='/' element={<Home />} />
                 <Route path='products/:_id' element={<ProductDetail />} />
                 <Route path='/cart' element={<Cart />} />
+                <Route path='/wishlist' element={<Wishlist />} />
             </Routes>
+            <ModalElement />
         </Box>
     );
 };

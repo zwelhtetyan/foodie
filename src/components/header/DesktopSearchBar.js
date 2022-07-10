@@ -1,11 +1,8 @@
 import { Input } from '@chakra-ui/react';
-import { useRef } from 'react';
-import { useAppContext } from '../../context/AppCtx';
+import React, { useRef } from 'react';
 import useSearchProduct from '../../hooks/useSearchProduct';
 
-const DesktopSearchBar = () => {
-    const { showDesktopSearchBar } = useAppContext();
-
+const DesktopSearchBar = ({ showDesktopSearchBar }) => {
     const searchInputRef = useRef();
 
     showDesktopSearchBar && searchInputRef.current.focus();
@@ -33,4 +30,4 @@ const DesktopSearchBar = () => {
     );
 };
 
-export default DesktopSearchBar;
+export default React.memo(DesktopSearchBar);

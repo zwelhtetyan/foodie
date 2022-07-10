@@ -3,6 +3,7 @@ import productUIReducer from './products-ui';
 import searchProductReducer from './search-product';
 import cartReducer from './cart-slice';
 import wishListReducer from './wishlist-slice';
+import modalSliceReducer from './modal-slice';
 
 const store = configureStore({
     reducer: {
@@ -10,6 +11,7 @@ const store = configureStore({
         searchProduct: searchProductReducer,
         cart: cartReducer,
         wishList: wishListReducer,
+        modal: modalSliceReducer,
     },
 });
 

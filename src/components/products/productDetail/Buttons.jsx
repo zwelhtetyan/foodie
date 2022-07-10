@@ -4,22 +4,26 @@ import { FiHeart } from 'react-icons/fi';
 import { cartIconBtnProp } from '../../../utilities/cartIconBtnProp';
 import { hoverBtnProp } from '../../../utilities/hoverBtnProp';
 import { AiOutlineMinus, AiOutlinePlus } from 'react-icons/ai';
-import { useDispatch } from 'react-redux';
-import { cartSliceAction } from '../../../store/cart-slice';
+import { useEffect } from 'react';
+import { FaHeart } from 'react-icons/fa';
+import useProductConflix from '../../../hooks/useProductConflix';
 
-const Buttons = ({ newItem }) => {
-    const dispatch = useDispatch();
+const Buttons = ({ newItem, isWishlist }) => {
     const [quantity, setQuantity] = useState(1);
+    const [totalPrice, setTotalPrice] = useState(newItem.price);
 
     const addQuantity = () => setQuantity((prev) => prev + 1);
 
     const reomveQuantity = () => setQuantity((prev) => prev - 1);
 
-    const transformedItem = { ...newItem, quantity: quantity };
+    useEffect(() => {
+        setTotalPrice(newItem.price * quantity);
+    }, [quantity, newItem.price]);
 
-    const addToCartHandler = () => {
-        dispatch(cartSliceAction.addToCart(transformedItem));
-    };
+    const transformedItem = { ...newItem, quantity: quantity, totalPrice };
+
+    const { addToCartHandler, addToWishListHandler } =
+        useProductConflix(transformedItem);
 
     return (
         <Flex width={'100%'} justifyContent='space-between'>
@@ -66,13 +70,17 @@ const Buttons = ({ newItem }) => {
             </Box>
 
             {/* wishlist icon */}
-            <Box>
+            <Box onClick={addToWishListHandler}>
                 <Button
                     sx={cartIconBtnProp}
                     _hover={hoverBtnProp}
                     // isLoading={true}
                 >
-                    <FiHeart size={20} />
+                    {isWishlist(newItem.id) ? (
+                        <FaHeart size={20} />
+                    ) : (
+                        <FiHeart size={20} />
+                    )}
                 </Button>
             </Box>
         </Flex>

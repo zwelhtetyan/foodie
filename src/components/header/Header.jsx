@@ -14,8 +14,10 @@ import useCloseSearch from '../../hooks/useCloseSearch';
 import { useSelector } from 'react-redux';
 
 const Header = () => {
-    const { showSearchBarHandler } = useAppContext();
+    const { showMobileSearchBar, showDesktopSearchBar, showSearchBarHandler } =
+        useAppContext();
     const { cartItems } = useSelector((state) => state.cart);
+    const { wishlist } = useSelector((state) => state.wishList);
     const handleClose = useCloseSearch();
 
     const navigate = useNavigate();
@@ -25,9 +27,11 @@ const Header = () => {
         0
     );
 
+    const totalWishlist = wishlist.length;
+
     return (
         <>
-            <MobileSearchBar />
+            <MobileSearchBar showMobileSearchBar={showMobileSearchBar} />
             <Flex
                 h={'65px'}
                 width='100%'
@@ -50,7 +54,10 @@ const Header = () => {
                         alignItems={'flex-end'}
                         cursor='pointer'
                         userSelect={'none'}
-                        onClick={() => navigate('/')}
+                        onClick={() => {
+                            handleClose();
+                            navigate('/');
+                        }}
                     >
                         <Image src={logo} alt='logo' w={42} h={42} />
                         <Text
@@ -63,18 +70,29 @@ const Header = () => {
                             SHOPIFY
                         </Text>
                     </Flex>
+
+                    {/* navbar right */}
                     <Flex alignItems='center'>
-                        <DesktopSearchBar />
+                        <DesktopSearchBar
+                            showDesktopSearchBar={showDesktopSearchBar}
+                        />
                         <Box
                             ms={['1.5rem', '2rem']}
                             onClick={showSearchBarHandler}
                         >
                             <BsSearch size={20} cursor={'pointer'} />
                         </Box>
-                        <Box ms={['1.5rem', '2rem']} pos='relative'>
-                            <FiHeart size={22} cursor={'pointer'} />
-                            <NotiBadge val='1' className='whishlistNotiBadge' />
-                        </Box>
+
+                        <Link to='/wishlist' onClick={handleClose}>
+                            <Box ms={['1.5rem', '2rem']} pos='relative'>
+                                <FiHeart size={22} cursor={'pointer'} />
+                                <NotiBadge
+                                    val={totalWishlist > 0 ? totalWishlist : ''}
+                                    className='whishlistNotiBadge'
+                                />
+                            </Box>
+                        </Link>
+
                         <Link to='/cart' onClick={handleClose}>
                             <Box ms={['1.5rem', '2rem']} pos='relative'>
                                 <BsCartDash size={22} cursor={'pointer'} />
@@ -84,6 +102,8 @@ const Header = () => {
                                 />
                             </Box>
                         </Link>
+
+                        {/* avatar */}
                         <UserAvatar />
                     </Flex>
                 </Flex>

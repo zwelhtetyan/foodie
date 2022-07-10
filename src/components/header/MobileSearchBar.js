@@ -1,11 +1,8 @@
 import React, { useRef } from 'react';
 import { Input, VStack } from '@chakra-ui/react';
-import { useAppContext } from '../../context/AppCtx';
 import useSearchProduct from '../../hooks/useSearchProduct';
 
-const MobileSearchBar = () => {
-    const { showMobileSearchBar } = useAppContext();
-
+const MobileSearchBar = ({ showMobileSearchBar }) => {
     const searchInputRef = useRef();
 
     showMobileSearchBar && searchInputRef.current.focus();
@@ -53,4 +50,4 @@ const MobileSearchBar = () => {
     );
 };
 
-export default MobileSearchBar;
+export default React.memo(MobileSearchBar);
