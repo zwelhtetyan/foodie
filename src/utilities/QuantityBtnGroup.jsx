@@ -2,7 +2,7 @@ import { Box, Button } from '@chakra-ui/react';
 import React from 'react';
 import { AiOutlineMinus, AiOutlinePlus } from 'react-icons/ai';
 import { useDispatch } from 'react-redux';
-import { cartSliceAction } from '../store/cart-slice';
+import { cartSliceAction } from '../store/cart/cart-slice';
 import { cartIconBtnProp } from './cartIconBtnProp';
 import { hoverBtnProp } from './hoverBtnProp';
 

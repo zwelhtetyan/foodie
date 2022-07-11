@@ -2,7 +2,7 @@ import { Box, Flex, Text } from '@chakra-ui/react';
 import React from 'react';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { productUISliceAction } from '../../store/products-ui';
+import { productUISliceAction } from '../../store/products/products-ui';
 import { categories } from './categroy-list';
 
 const Category = () => {

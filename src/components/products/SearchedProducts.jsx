@@ -3,7 +3,6 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import SingleProduct from './SingleProduct';
 import { IoCloseOutline } from 'react-icons/io5';
-
 import useCloseSearch from '../../hooks/useCloseSearch';
 
 const SearchedProducts = () => {
@@ -11,8 +10,6 @@ const SearchedProducts = () => {
     const { isSearch, searchTerm } = useSelector(
         (state) => state.searchProduct
     );
-
-    const cartItems = useSelector((state) => state.cart.cartItems);
     const wishlists = useSelector((state) => state.wishList.wishlist);
 
     const handleClose = useCloseSearch();
@@ -28,7 +25,6 @@ const SearchedProducts = () => {
                 key={item.id}
                 onClose={handleClose}
                 wishlists={wishlists}
-                cartItems={cartItems}
             />
         ));
     };
@@ -94,4 +90,4 @@ const SearchedProducts = () => {
     return <>{isSearch && showSearchedProducts}</>;
 };
 
-export default SearchedProducts;
+export default React.memo(SearchedProducts);

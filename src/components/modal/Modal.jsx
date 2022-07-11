@@ -9,9 +9,9 @@ import {
     Text,
 } from '@chakra-ui/react';
 import { useDispatch, useSelector } from 'react-redux';
-import { cartSliceAction } from '../../store/cart-slice';
+import { cartSliceAction } from '../../store/cart/cart-slice';
 import { modalSliceAction } from '../../store/modal-slice';
-import { wishListSliceAction } from '../../store/wishlist-slice';
+import { wishListSliceAction } from '../../store/wishlist/wishlist-slice';
 
 const ModalElement = () => {
     const dispatch = useDispatch();

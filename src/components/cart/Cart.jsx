@@ -3,7 +3,7 @@ import React from 'react';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { cartSliceAction } from '../../store/cart-slice';
+import { cartSliceAction } from '../../store/cart/cart-slice';
 import BackBtn from '../../utilities/BackBtn';
 import { cartIconBtnProp } from '../../utilities/cartIconBtnProp';
 import { hoverBtnProp } from '../../utilities/hoverBtnProp';
@@ -11,8 +11,14 @@ import CartItem from './CartItem';
 
 const Cart = () => {
     const { cartItems } = useSelector((state) => state.cart);
+    const { loading, error } = useSelector((state) => state.cartUI);
     const dispatch = useDispatch();
     const navigate = useNavigate();
+
+    const totalPrice = cartItems.reduce(
+        (amount, item) => amount + item.price * item.quantity,
+        0
+    );
 
     const removeFromCartHandler = (id) =>
         dispatch(cartSliceAction.removeFromCart(id));
@@ -34,11 +40,6 @@ const Cart = () => {
                 Empty Cart Bro!
             </Text>
         );
-
-    const totalPrice = cartItems.reduce(
-        (amount, item) => amount + item.price * item.quantity,
-        0
-    );
 
     const clearCartHandler = () => {
         dispatch(cartSliceAction.clearCart());
@@ -62,6 +63,16 @@ const Cart = () => {
         </>
     );
 
+    const cartContent = (
+        <>
+            <BackBtn onBack={() => navigate('/')} />
+            <Box maxWidth='1000px' m='auto' mt='1rem' mb='2rem'>
+                {cartItemSection}
+            </Box>
+            {cartItems.length > 0 && cartFooter}
+        </>
+    );
+
     //scroll to top when this component mount
     const loacation = useLocation();
     useEffect(() => {
@@ -75,11 +86,14 @@ const Cart = () => {
                 mb='2rem'
                 px={['0', '1rem', '3rem']}
             >
-                <BackBtn onBack={() => navigate('/')} />
-                <Box maxWidth='1000px' m='auto' mt='1rem' mb='2rem'>
-                    {cartItemSection}
-                </Box>
-                {cartItems.length > 0 && cartFooter}
+                {error && (
+                    <Text textAlign='center'>
+                        {error}. Please check your internet connection and try
+                        again.
+                    </Text>
+                )}
+                {loading && <Text textAlign='center'>Loading...</Text>}
+                {!error && !loading && cartContent}
             </Box>
         </Box>
     );

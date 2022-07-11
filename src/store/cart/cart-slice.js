@@ -2,12 +2,17 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
     cartItems: [],
+    change: false,
 };
 
 const cartSlice = createSlice({
     name: 'cart',
     initialState,
     reducers: {
+        setCartItems(state, action) {
+            state.cartItems = action.payload || [];
+        },
+
         addToCart(state, action) {
             const newItem = action.payload;
 
@@ -30,12 +35,14 @@ const cartSlice = createSlice({
             } else {
                 state.cartItems = [...state.cartItems, newItem];
             }
+            state.change = true;
         },
 
         removeFromCart(state, action) {
             state.cartItems = state.cartItems.filter(
                 (item) => item.id !== action.payload
             );
+            state.change = true;
         },
 
         addQuantity(state, action) {
@@ -48,6 +55,7 @@ const cartSlice = createSlice({
                       }
                     : item
             );
+            state.change = true;
         },
 
         removeQuantity(state, action) {
@@ -62,10 +70,12 @@ const cartSlice = createSlice({
             );
 
             state.cartItems = itemArr.filter((item) => item.quantity > 0);
+            state.change = true;
         },
 
         clearCart(state) {
             state.cartItems = [];
+            state.change = true;
         },
     },
 });

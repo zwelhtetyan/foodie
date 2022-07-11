@@ -1,6 +1,6 @@
 import { useDispatch } from 'react-redux';
 import { useAppContext } from '../context/AppCtx';
-import { searchProductSliceAction } from '../store/search-product';
+import { searchProductSliceAction } from '../store/products/search-product';
 
 const useCloseSearch = () => {
     const { setShowDesktopSearchBar, setShowMobileSearchBar } = useAppContext();

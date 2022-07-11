@@ -1,5 +1,5 @@
-import { Badge, Button, Flex, Image, Text, VStack } from '@chakra-ui/react';
 import React from 'react';
+import { Badge, Button, Flex, Image, Text, VStack } from '@chakra-ui/react';
 import { FiHeart } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
 import { cartIconBtnProp } from '../../utilities/cartIconBtnProp';
@@ -17,7 +17,6 @@ const SingleProduct = ({
     onClose,
     quantity,
     wishlists,
-    cartItems,
 }) => {
     const isWishlist = (id) => wishlists.some((item) => item.id === id);
 
@@ -78,7 +77,6 @@ const SingleProduct = ({
             </Badge>
             <Flex alignItems='center' justifyContent={'space-between'} w='100%'>
                 <Button
-                    // isLoading={true}
                     sx={cartIconBtnProp}
                     _hover={{ md: hoverBtnProp }}
                     onClick={addToWishListHandler}
@@ -90,11 +88,8 @@ const SingleProduct = ({
                     )}
                 </Button>
                 <Button
-                    // isLoading={true}
-                    // loadingText={'Loading'}
-                    // spinnerPlacement='end'
                     sx={cartIconBtnProp}
-                    _hover={{ md: hoverBtnProp }}
+                    _hover={hoverBtnProp}
                     width='100%'
                     borderLeft={'none !important'}
                     fontWeight={'sm'}

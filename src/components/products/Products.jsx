@@ -2,7 +2,7 @@ import { Box, Button, Flex, Text, VStack } from '@chakra-ui/react';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import useSkeleton from '../../hooks/useSkeleton';
-import fetchProductData from '../../store/products-action';
+import fetchProductData from '../../store/products/products-action';
 import Category from '../category/Category';
 import SingleProduct from './SingleProduct';
 
@@ -12,7 +12,6 @@ const Products = () => {
         (state) => state.productUI
     );
 
-    const cartItems = useSelector((state) => state.cart.cartItems);
     const wishlists = useSelector((state) => state.wishList.wishlist);
 
     let categotyType = ctegType.toLowerCase();
@@ -39,12 +38,7 @@ const Products = () => {
     const displayProducts = (
         <>
             {productsToDisplay?.map((item) => (
-                <SingleProduct
-                    {...item}
-                    key={item.id}
-                    wishlists={wishlists}
-                    cartItems={cartItems}
-                />
+                <SingleProduct {...item} key={item.id} wishlists={wishlists} />
             ))}
         </>
     );
@@ -92,4 +86,4 @@ const Products = () => {
     );
 };
 
-export default Products;
+export default React.memo(Products);
