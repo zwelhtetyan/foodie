@@ -16,7 +16,7 @@ const SearchedProducts = () => {
 
     const displayProducts = () => {
         const filteredProducts = products?.filter((item) =>
-            item.title.toLowerCase().includes(searchTerm)
+            item.title.toLowerCase().includes(searchTerm.toLowerCase())
         );
 
         return filteredProducts?.map((item) => (

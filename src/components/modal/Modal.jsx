@@ -29,6 +29,7 @@ const ModalElement = () => {
     const signInWithGoogle = () => {
         signInWithPopup(auth, provider)
             .then((response) => {
+                console.log('sign in done');
                 onClose();
                 dispatch(
                     authSliceAction.setAuth({
@@ -38,7 +39,6 @@ const ModalElement = () => {
                         userId: response.user.uid,
                     })
                 );
-
                 localStorage.setItem(
                     'user',
                     JSON.stringify({
