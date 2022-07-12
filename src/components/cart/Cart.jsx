@@ -65,7 +65,6 @@ const Cart = () => {
 
     const cartContent = (
         <>
-            <BackBtn onBack={() => navigate('/')} />
             <Box maxWidth='1000px' m='auto' mt='1rem' mb='2rem'>
                 {cartItemSection}
             </Box>
@@ -86,6 +85,8 @@ const Cart = () => {
                 mb='2rem'
                 px={['0', '1rem', '3rem']}
             >
+                <BackBtn onBack={() => navigate('/')} />
+
                 {error && (
                     <Text textAlign='center'>
                         {error}. Please check your internet connection and try

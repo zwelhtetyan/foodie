@@ -69,6 +69,11 @@ const Products = () => {
     return (
         <Box maxWidth={'1200px'} m='auto'>
             {errorContent}
+            {fetchingStatus.loading && (
+                <Flex flexWrap={'wrap'} mt={5}>
+                    {productSkeletonArr}
+                </Flex>
+            )}
             {products && !fetchingStatus.loading && (
                 <>
                     <Category />
@@ -76,11 +81,6 @@ const Products = () => {
                         {displayProducts}
                     </Flex>
                 </>
-            )}
-            {fetchingStatus.loading && (
-                <Flex flexWrap={'wrap'} mt={5}>
-                    {productSkeletonArr}
-                </Flex>
             )}
         </Box>
     );

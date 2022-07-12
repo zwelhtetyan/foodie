@@ -1,4 +1,4 @@
-I inspired slide photo and some layout design from 'https://haru-fashion.vercel.app/' and code my own.
+I inspired slide photo and some layout design from https://haru-fashion.vercel.app/ and code my own.
 
 # Getting Started with Create React App
 

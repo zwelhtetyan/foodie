@@ -89,7 +89,7 @@ const SingleProduct = ({
                 </Button>
                 <Button
                     sx={cartIconBtnProp}
-                    _hover={hoverBtnProp}
+                    _hover={{md: hoverBtnProp}}
                     width='100%'
                     borderLeft={'none !important'}
                     fontWeight={'sm'}

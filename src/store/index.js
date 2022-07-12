@@ -6,6 +6,7 @@ import wishListReducer from './wishlist/wishlist-slice';
 import modalSliceReducer from './modal-slice';
 import cartUIReducer from './cart/cart-ui';
 import wishlistUIReducer from './wishlist/wishlist-ui';
+import authReducer from './auth';
 
 const store = configureStore({
     reducer: {
@@ -16,6 +17,7 @@ const store = configureStore({
         modal: modalSliceReducer,
         cartUI: cartUIReducer,
         wishlistUI: wishlistUIReducer,
+        auth: authReducer,
     },
 });
 

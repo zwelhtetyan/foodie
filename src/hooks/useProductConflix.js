@@ -2,8 +2,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { cartSliceAction } from '../store/cart/cart-slice';
 import { modalSliceAction } from '../store/modal-slice';
 import { wishListSliceAction } from '../store/wishlist/wishlist-slice';
+import showAuthAlert from '../utilities/showAuthAlert';
 
 const useProductConflix = (newItem) => {
+    const { isAuthenticated } = useSelector((state) => state.auth);
     const { cartItems } = useSelector((state) => state.cart);
     const { wishlist } = useSelector((state) => state.wishList);
     const dispatch = useDispatch();
@@ -17,6 +19,11 @@ const useProductConflix = (newItem) => {
     };
 
     const addToWishListHandler = () => {
+        if (!isAuthenticated) {
+            showAuthAlert(dispatch);
+            return;
+        }
+
         if (alreadyInCart(newItem.id)) {
             console.log('alreay exist in cart , so we will remove it');
             dispatch(
@@ -32,6 +39,11 @@ const useProductConflix = (newItem) => {
     };
 
     const addToCartHandler = () => {
+        if (!isAuthenticated) {
+            showAuthAlert(dispatch);
+            return;
+        }
+
         if (alreadyInWishlist(newItem.id)) {
             console.log('alreay exist in wishlist, so  we will remove it');
             dispatch(

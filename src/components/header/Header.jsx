@@ -8,16 +8,20 @@ import UserAvatar from './Avatar';
 import DesktopSearchBar from './DesktopSearchBar';
 import MobileSearchBar from './MobileSearchBar';
 import { useAppContext } from '../../context/AppCtx';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import NotiBadge from '../../utilities/NotiBadge';
 import useCloseSearch from '../../hooks/useCloseSearch';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import showAuthAlert from '../../utilities/showAuthAlert';
 
 const Header = () => {
     const { showMobileSearchBar, showDesktopSearchBar, showSearchBarHandler } =
         useAppContext();
     const { cartItems } = useSelector((state) => state.cart);
     const { wishlist } = useSelector((state) => state.wishList);
+    const { isAuthenticated } = useSelector((state) => state.auth);
+    const dispatch = useDispatch();
+
     const handleClose = useCloseSearch();
 
     const navigate = useNavigate();
@@ -28,6 +32,24 @@ const Header = () => {
     );
 
     const totalWishlist = wishlist.length;
+
+    const handleClickWishlistIcon = () => {
+        if (!isAuthenticated) {
+            showAuthAlert(dispatch);
+            return;
+        }
+        handleClose();
+        navigate('/wishlist');
+    };
+
+    const handleClickCartIcon = () => {
+        if (!isAuthenticated) {
+            showAuthAlert(dispatch);
+            return;
+        }
+        handleClose();
+        navigate('/cart');
+    };
 
     return (
         <>
@@ -83,25 +105,33 @@ const Header = () => {
                             <BsSearch size={20} cursor={'pointer'} />
                         </Box>
 
-                        <Link to='/wishlist' onClick={handleClose}>
-                            <Box ms={['1.5rem', '2rem']} pos='relative'>
-                                <FiHeart size={22} cursor={'pointer'} />
-                                <NotiBadge
-                                    val={totalWishlist > 0 ? totalWishlist : ''}
-                                    className='whishlistNotiBadge'
-                                />
-                            </Box>
-                        </Link>
+                        {/* <Link to='/wishlist' onClick={handleClose}> */}
+                        <Box
+                            ms={['1.5rem', '2rem']}
+                            pos='relative'
+                            onClick={handleClickWishlistIcon}
+                        >
+                            <FiHeart size={22} cursor={'pointer'} />
+                            <NotiBadge
+                                val={totalWishlist > 0 ? totalWishlist : ''}
+                                className='whishlistNotiBadge'
+                            />
+                        </Box>
+                        {/* </Link> */}
 
-                        <Link to='/cart' onClick={handleClose}>
-                            <Box ms={['1.5rem', '2rem']} pos='relative'>
-                                <BsCartDash size={22} cursor={'pointer'} />
-                                <NotiBadge
-                                    val={totalAmount > 0 ? totalAmount : ''}
-                                    className='cartNotiBadge'
-                                />
-                            </Box>
-                        </Link>
+                        {/* <Link to='/cart' onClick={handleClose}> */}
+                        <Box
+                            ms={['1.5rem', '2rem']}
+                            pos='relative'
+                            onClick={handleClickCartIcon}
+                        >
+                            <BsCartDash size={22} cursor={'pointer'} />
+                            <NotiBadge
+                                val={totalAmount > 0 ? totalAmount : ''}
+                                className='cartNotiBadge'
+                            />
+                        </Box>
+                        {/* </Link> */}
 
                         {/* avatar */}
                         <UserAvatar />

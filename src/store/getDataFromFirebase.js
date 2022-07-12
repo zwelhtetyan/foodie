@@ -8,9 +8,9 @@ const getDataFromFirebase = (url) => {
         const getRequest = async () => {
             console.log(`fetching ${url} data from firebase`);
 
-            if (url === 'cart') {
+            if (url.includes('cart')) {
                 dispatch(cartUISliceActions.setLoading(true));
-            } else if (url === 'wishlist') {
+            } else if (url.includes('wishlist')) {
                 dispatch(wishlistUISliceActions.setLoading(true));
             }
 
@@ -24,20 +24,20 @@ const getDataFromFirebase = (url) => {
 
             const data = await response.json();
 
-            if (url === 'cart') {
+            if (url.includes('cart')) {
                 dispatch(cartSliceAction.setCartItems(data));
                 dispatch(cartUISliceActions.setLoading(false));
-            } else if (url === 'wishlist') {
+            } else if (url.includes('wishlist')) {
                 dispatch(wishListSliceAction.setWishlist(data));
                 dispatch(wishlistUISliceActions.setLoading(false));
             }
         };
 
         getRequest().catch((err) => {
-            if (url === 'cart') {
+            if (url.includes('cart')) {
                 dispatch(cartUISliceActions.setError(err.message));
                 dispatch(cartUISliceActions.setLoading(false));
-            } else if (url === 'wishlist') {
+            } else if (url.includes('wishlist')) {
                 dispatch(wishlistUISliceActions.setError(err.message));
                 dispatch(wishlistUISliceActions.setLoading(false));
             }

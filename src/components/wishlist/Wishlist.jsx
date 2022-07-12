@@ -45,7 +45,6 @@ const Wishlist = () => {
 
     const wishlistContent = (
         <>
-            <BackBtn onBack={() => navigate('/')} />
             <Box maxWidth='1000px' m='auto' mt='1rem' mb='2rem'>
                 <Box mb='2rem'>{displayWishlist}</Box>
                 {wishlists.length > 0 ? (
@@ -66,6 +65,8 @@ const Wishlist = () => {
                 mb='2rem'
                 px={['0', '1rem', '3rem']}
             >
+                <BackBtn onBack={() => navigate('/')} />
+
                 {error && (
                     <Text textAlign='center'>
                         {error}. Please check your internet connection and try

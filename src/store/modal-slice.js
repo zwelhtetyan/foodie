@@ -3,9 +3,10 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialState = {
     addingState: {
         isOpen: false,
-        content: 'hi',
+        content: '',
         newItem: null,
         addingTo: null,
+        isAuthAlert: false,
     },
 };
 
@@ -22,6 +23,7 @@ const modalSlice = createSlice({
             state.addingState.content = action.payload.content;
             state.addingState.newItem = action.payload.newItem;
             state.addingState.addingTo = action.payload.addingTo;
+            state.addingState.isAuthAlert = action.payload.isAuthAlert;
         },
     },
 });
