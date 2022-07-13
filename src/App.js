@@ -13,6 +13,7 @@ import ModalElement from './components/modal/Modal';
 import useSendDataToFirebase from './hooks/useSendDataToFirebase';
 import getDataFromFirebase from './store/getDataFromFirebase';
 import UserAccount from './pages/UserAccount';
+import Error from './pages/Error';
 
 let initialRender = true;
 
@@ -68,6 +69,7 @@ const App = () => {
                 <Route path='/cart' element={<Cart />} />
                 <Route path='/wishlist' element={<Wishlist />} />
                 <Route path='userAccount' element={<UserAccount />} />
+                <Route path='/*' element={<Error />} />
             </Routes>
             <ModalElement />
         </Box>

@@ -51,6 +51,8 @@ const Header = () => {
         navigate('/cart');
     };
 
+    console.log('header render');
+
     return (
         <>
             <MobileSearchBar showMobileSearchBar={showMobileSearchBar} />
