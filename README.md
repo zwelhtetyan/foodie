@@ -1,7 +1,5 @@
 # An Ecommerce Application using React + Firebase and more
 
-<img src='./src/assets/image/preview.png'/>
-
 ## Features
 
 -  Add to cart
