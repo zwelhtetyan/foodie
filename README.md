@@ -1,4 +1,4 @@
-# An Ecommerce Application using React , Firebase and more
+# An Ecommerce Application using React + Firebase and more
 
 <img src='./src/assets/image/preview.png'/>
 
@@ -18,4 +18,4 @@
 
 ## Credit
 
-I used slide photo and inspired some layout design from 👉 https://haru-fashion.vercel.app/ and code on my own.
+I used slide photos and inspired some layout design from 👉 https://haru-fashion.vercel.app/ and code on my own.
