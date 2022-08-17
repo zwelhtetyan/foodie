@@ -1,7 +1,7 @@
 import { productUISliceAction } from './products-ui';
 
 const fetchProductData = () => {
-   console.log('fetching product data');
+   // console.log('fetching product data');
    return (dispatch) => {
       dispatch(productUISliceAction.setLoading(true));
 

@@ -7,7 +7,6 @@ const initialState = {
       skeletonsToShow: 10,
       error: null,
    },
-   ctegType: 'all',
 };
 
 const productUISlice = createSlice({
@@ -20,10 +19,6 @@ const productUISlice = createSlice({
 
       setLoading(state, action) {
          state.fetchingStatus.loading = action.payload;
-      },
-
-      setCtegType(state, action) {
-         state.ctegType = action.payload;
       },
 
       setError(state, action) {

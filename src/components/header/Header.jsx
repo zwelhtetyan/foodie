@@ -15,133 +15,128 @@ import { useDispatch, useSelector } from 'react-redux';
 import showAuthAlert from '../../utilities/showAuthAlert';
 
 const Header = () => {
-    const { showMobileSearchBar, showDesktopSearchBar, showSearchBarHandler } =
-        useAppContext();
-    const { cartItems } = useSelector((state) => state.cart);
-    const { wishlist } = useSelector((state) => state.wishList);
-    const { isAuthenticated } = useSelector((state) => state.auth);
-    const dispatch = useDispatch();
+   const { showMobileSearchBar, showDesktopSearchBar, showSearchBarHandler } =
+      useAppContext();
+   const { cartItems } = useSelector((state) => state.cart);
+   const { wishlist } = useSelector((state) => state.wishList);
+   const { isAuthenticated } = useSelector((state) => state.auth);
+   const dispatch = useDispatch();
 
-    const handleClose = useCloseSearch();
+   const handleClose = useCloseSearch();
 
-    const navigate = useNavigate();
+   const navigate = useNavigate();
 
-    const totalAmount = cartItems.reduce(
-        (amount, item) => amount + item.quantity,
-        0
-    );
+   const totalAmount = cartItems.reduce(
+      (amount, item) => amount + item.quantity,
+      0
+   );
 
-    const totalWishlist = wishlist.length;
+   const totalWishlist = wishlist.length;
 
-    const handleClickWishlistIcon = () => {
-        if (!isAuthenticated) {
-            showAuthAlert(dispatch);
-            return;
-        }
-        handleClose();
-        navigate('/wishlist');
-    };
+   const handleClickWishlistIcon = () => {
+      if (!isAuthenticated) {
+         showAuthAlert(dispatch);
+         return;
+      }
+      handleClose();
+      navigate('/wishlist');
+   };
 
-    const handleClickCartIcon = () => {
-        if (!isAuthenticated) {
-            showAuthAlert(dispatch);
-            return;
-        }
-        handleClose();
-        navigate('/cart');
-    };
+   const handleClickCartIcon = () => {
+      if (!isAuthenticated) {
+         showAuthAlert(dispatch);
+         return;
+      }
+      handleClose();
+      navigate('/cart');
+   };
 
-    console.log('header render');
-
-    return (
-        <>
-            <MobileSearchBar showMobileSearchBar={showMobileSearchBar} />
+   return (
+      <>
+         <MobileSearchBar showMobileSearchBar={showMobileSearchBar} />
+         <Flex
+            h={'65px'}
+            width='100%'
+            bg={'white'}
+            px={['.5rem', '2rem', '5rem']}
+            alignItems={'center'}
+            justifyContent={'center'}
+            pos={'fixed'}
+            top={0}
+            left={0}
+            zIndex='99'
+            boxShadow={'lg'}
+         >
             <Flex
-                h={'65px'}
-                width='100%'
-                bg={'white'}
-                px={['.5rem', '2rem', '5rem']}
-                alignItems={'center'}
-                justifyContent={'center'}
-                pos={'fixed'}
-                top={0}
-                left={0}
-                zIndex='99'
-                boxShadow={'lg'}
+               justifyContent={'space-between'}
+               width='100%'
+               maxWidth={'1200px'}
             >
-                <Flex
-                    justifyContent={'space-between'}
-                    width='100%'
-                    maxWidth={'1200px'}
-                >
-                    <Flex
-                        alignItems={'flex-end'}
-                        cursor='pointer'
-                        userSelect={'none'}
-                        onClick={() => {
-                            handleClose();
-                            navigate('/');
-                        }}
-                    >
-                        <Image src={logo} alt='logo' w={42} h={42} />
-                        <Text
-                            fontSize={{ base: '19px', sm: '2xl' }}
-                            letterSpacing={1}
-                            fontFamily={'monospace'}
-                            fontWeight='extrabold'
-                            className='brand_name'
-                        >
-                            SHOPIFY
-                        </Text>
-                    </Flex>
+               <Flex
+                  alignItems={'flex-end'}
+                  cursor='pointer'
+                  userSelect={'none'}
+                  onClick={() => {
+                     handleClose();
+                     navigate('/');
+                  }}
+               >
+                  <Image src={logo} alt='logo' w={42} h={42} />
+                  <Text
+                     fontSize={{ base: '19px', sm: '2xl' }}
+                     letterSpacing={1}
+                     fontFamily={'monospace'}
+                     fontWeight='extrabold'
+                     className='brand_name'
+                  >
+                     SHOPIFY
+                  </Text>
+               </Flex>
 
-                    {/* navbar right */}
-                    <Flex alignItems='center'>
-                        <DesktopSearchBar
-                            showDesktopSearchBar={showDesktopSearchBar}
-                        />
-                        <Box
-                            ms={['1.5rem', '2rem']}
-                            onClick={showSearchBarHandler}
-                        >
-                            <BsSearch size={20} cursor={'pointer'} />
-                        </Box>
+               {/* navbar right */}
+               <Flex alignItems='center'>
+                  <DesktopSearchBar
+                     showDesktopSearchBar={showDesktopSearchBar}
+                  />
+                  <Box ms={['1.5rem', '2rem']} onClick={showSearchBarHandler}>
+                     <BsSearch size={20} cursor={'pointer'} />
+                  </Box>
 
-                        {/* <Link to='/wishlist' onClick={handleClose}> */}
-                        <Box
-                            ms={['1.5rem', '2rem']}
-                            pos='relative'
-                            onClick={handleClickWishlistIcon}
-                        >
-                            <FiHeart size={22} cursor={'pointer'} />
-                            <NotiBadge
-                                val={totalWishlist > 0 ? totalWishlist : ''}
-                                className='whishlistNotiBadge'
-                            />
-                        </Box>
-                        {/* </Link> */}
+                  {/* <Link to='/wishlist' onClick={handleClose}> */}
+                  <Box
+                     ms={['1.5rem', '2rem']}
+                     pos='relative'
+                     onClick={handleClickWishlistIcon}
+                  >
+                     <FiHeart size={22} cursor={'pointer'} />
+                     <NotiBadge
+                        val={totalWishlist > 0 ? totalWishlist : ''}
+                        className='whishlistNotiBadge'
+                     />
+                  </Box>
+                  {/* </Link> */}
 
-                        {/* <Link to='/cart' onClick={handleClose}> */}
-                        <Box
-                            ms={['1.5rem', '2rem']}
-                            pos='relative'
-                            onClick={handleClickCartIcon}
-                        >
-                            <BsCartDash size={22} cursor={'pointer'} />
-                            <NotiBadge
-                                val={totalAmount > 0 ? totalAmount : ''}
-                                className='cartNotiBadge'
-                            />
-                        </Box>
-                        {/* </Link> */}
+                  {/* <Link to='/cart' onClick={handleClose}> */}
+                  <Box
+                     ms={['1.5rem', '2rem']}
+                     pos='relative'
+                     onClick={handleClickCartIcon}
+                  >
+                     <BsCartDash size={22} cursor={'pointer'} />
+                     <NotiBadge
+                        val={totalAmount > 0 ? totalAmount : ''}
+                        className='cartNotiBadge'
+                     />
+                  </Box>
+                  {/* </Link> */}
 
-                        {/* avatar */}
-                        <UserAvatar />
-                    </Flex>
-                </Flex>
+                  {/* avatar */}
+                  <UserAvatar />
+               </Flex>
             </Flex>
-        </>
-    );
+         </Flex>
+      </>
+   );
 };
 
 export default Header;

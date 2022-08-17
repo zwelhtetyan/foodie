@@ -6,22 +6,22 @@ import smallSlide2 from '../../assets/image/smallSlide2.webp';
 import smallSlide3 from '../../assets/image/smallSlide3.webp';
 
 export const slideToShow = [
-    {
-        slide: [smallSlide1, bigSlide1],
-        badge: 'Spring Revolution',
-        content: 'Night Summer Dress',
-        pos: 'end',
-    },
-    {
-        slide: [smallSlide2, bigSlide2],
-        badge: '50% off',
-        content: 'New Cocktail Dresses',
-        pos: 'start',
-    },
-    {
-        slide: [smallSlide3, bigSlide3],
-        badge: 'Spring promo',
-        content: 'The Weekend Promotions',
-        pos: 'start',
-    },
+   {
+      slide: [smallSlide1, bigSlide1],
+      badge: 'Spring Revolution',
+      content: 'Night Summer Dress',
+      pos: 'flex-end',
+   },
+   {
+      slide: [smallSlide2, bigSlide2],
+      badge: '50% off',
+      content: 'New Cocktail Dresses',
+      pos: 'flex-start',
+   },
+   {
+      slide: [smallSlide3, bigSlide3],
+      badge: 'Spring promo',
+      content: 'The Weekend Promotions',
+      pos: 'flex-start',
+   },
 ];

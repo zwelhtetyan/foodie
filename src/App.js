@@ -31,10 +31,10 @@ const App = () => {
       if (initialRender) {
          initialRender = false;
          dispatch(fetchProductData()); // fetch product from fakestore api
-      }
 
-      dispatch(getDataFromFirebase('cart' + userId)); // fetch cart data from firebase
-      dispatch(getDataFromFirebase('wishlist' + userId)); // fetch wishlist data from firebase
+         dispatch(getDataFromFirebase('cart' + userId)); // fetch cart data from firebase
+         dispatch(getDataFromFirebase('wishlist' + userId)); // fetch wishlist data from firebase
+      }
    }, [dispatch, userId, isAuthenticated]);
 
    //send cart data to firebase
@@ -54,8 +54,6 @@ const App = () => {
          );
       }
    }, [wishlist, sendRequest, wishlistChange, userId]);
-
-   console.log('app render');
 
    return (
       <Box>

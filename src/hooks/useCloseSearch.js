@@ -3,18 +3,18 @@ import { useAppContext } from '../context/AppCtx';
 import { searchProductSliceAction } from '../store/products/search-product';
 
 const useCloseSearch = () => {
-    const { setShowDesktopSearchBar, setShowMobileSearchBar } = useAppContext();
+   const { setShowDesktopSearchBar, setShowMobileSearchBar } = useAppContext();
 
-    const dispatch = useDispatch();
+   const dispatch = useDispatch();
 
-    const handleClose = () => {
-        dispatch(searchProductSliceAction.setIsSearch(false));
-        window.innerWidth > 992
-            ? setShowDesktopSearchBar(false)
-            : setShowMobileSearchBar(false);
-    };
+   const handleClose = () => {
+      dispatch(searchProductSliceAction.setIsSearch(false));
+      window.innerWidth > 992
+         ? setShowDesktopSearchBar(false)
+         : setShowMobileSearchBar(false);
+   };
 
-    return handleClose;
+   return handleClose;
 };
 
 export default useCloseSearch;
