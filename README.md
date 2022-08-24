@@ -1,19 +1,19 @@
-# An Ecommerce Application using React + Firebase and more
+## An Ecommerce Application using React + Firebase and more
 
-## Features
+### Features
 
 -  Add to cart
--  Add to wishlist
+-  Add to wishlist 
 -  View product Detail
 -  Search porducts
 -  google authentication
 
-## Tech stacks
+### Tech stacks
 
 -  React
 -  Firebase
 -  Chakra UI
 
-## Credit
+### Credit
 
 I used slide photos and inspired some layout design from 👉 https://haru-fashion.vercel.app/ and code on my own.
