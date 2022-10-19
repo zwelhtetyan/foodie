@@ -1,4 +1,4 @@
-## An Ecommerce Application using React + Firebase and more
+## An E-commerce Application using React + Firebase and more
 
 ### Features
 
