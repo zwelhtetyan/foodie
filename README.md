@@ -4,6 +4,8 @@
 
 ![Image description](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/bqkyin1qme2l60kyxujs.png)
 
+![Image description](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/qjq6hvjmfrmztkzfr0ub.png)
+
 ### Features
 
 -  Add to cart
