@@ -9,82 +9,75 @@ import { FaHeart } from 'react-icons/fa';
 import useProductConflix from '../../../hooks/useProductConflix';
 
 const Buttons = ({ newItem, isWishlist }) => {
-    const [quantity, setQuantity] = useState(1);
-    const [totalPrice, setTotalPrice] = useState(newItem.price);
+   const [quantity, setQuantity] = useState(1);
+   const [totalPrice, setTotalPrice] = useState(newItem.price);
 
-    const addQuantity = () => setQuantity((prev) => prev + 1);
+   const addQuantity = () => setQuantity((prev) => prev + 1);
 
-    const reomveQuantity = () => setQuantity((prev) => prev - 1);
+   const reomveQuantity = () => setQuantity((prev) => prev - 1);
 
-    useEffect(() => {
-        setTotalPrice(newItem.price * quantity);
-    }, [quantity, newItem.price]);
+   useEffect(() => {
+      setTotalPrice(newItem.price * quantity);
+   }, [quantity, newItem.price]);
 
-    const transformedItem = { ...newItem, quantity: quantity, totalPrice };
+   const transformedItem = { ...newItem, quantity: quantity, totalPrice };
 
-    const { addToCartHandler, addToWishListHandler } =
-        useProductConflix(transformedItem);
+   const { addToCartHandler, addToWishListHandler } =
+      useProductConflix(transformedItem);
 
-    return (
-        <Flex width={'100%'} justifyContent='space-between'>
-            {/* quantity buttons */}
-            <Box>
-                <Button
-                    sx={cartIconBtnProp}
-                    _hover={quantity !== 1 && hoverBtnProp}
-                    onClick={reomveQuantity}
-                    disabled={quantity === 1}
-                >
-                    <AiOutlineMinus size={20} />
-                </Button>
+   return (
+      <Flex width={'100%'} justifyContent='space-between'>
+         {/* quantity buttons */}
+         <Box>
+            <Button
+               sx={cartIconBtnProp}
+               _hover={quantity !== 1 && hoverBtnProp}
+               onClick={reomveQuantity}
+               disabled={quantity === 1}
+            >
+               <AiOutlineMinus size={20} />
+            </Button>
 
-                <Button sx={cartIconBtnProp} borderLeft='none !important'>
-                    {quantity}
-                </Button>
+            <Button sx={cartIconBtnProp} borderLeft='none !important'>
+               {quantity}
+            </Button>
 
-                <Button
-                    sx={cartIconBtnProp}
-                    _hover={hoverBtnProp}
-                    borderLeft='none !important'
-                    onClick={addQuantity}
-                >
-                    <AiOutlinePlus size={20} />
-                </Button>
-            </Box>
+            <Button
+               sx={cartIconBtnProp}
+               _hover={hoverBtnProp}
+               borderLeft='none !important'
+               onClick={addQuantity}
+            >
+               <AiOutlinePlus size={20} />
+            </Button>
+         </Box>
 
-            {/* add to cart */}
-            <Box mx={3} flex={1} onClick={addToCartHandler}>
-                <Button
-                    // isLoading={true}
-                    // loadingText={'Loading'}
-                    // spinnerPlacement='end'
-                    sx={cartIconBtnProp}
-                    width='100%'
-                    _hover={hoverBtnProp}
-                    fontWeight={'sm'}
-                    fontSize={'md'}
-                    color='black'
-                >
-                    Add to cart
-                </Button>
-            </Box>
+         {/* add to cart */}
+         <Box mx={3} flex={1} onClick={addToCartHandler}>
+            <Button
+               sx={cartIconBtnProp}
+               width='100%'
+               _hover={hoverBtnProp}
+               fontWeight={'sm'}
+               fontSize={'md'}
+               color='black'
+            >
+               Add to cart
+            </Button>
+         </Box>
 
-            {/* wishlist icon */}
-            <Box onClick={addToWishListHandler}>
-                <Button
-                    sx={cartIconBtnProp}
-                    _hover={hoverBtnProp}
-                    // isLoading={true}
-                >
-                    {isWishlist(newItem.id) ? (
-                        <FaHeart size={20} />
-                    ) : (
-                        <FiHeart size={20} />
-                    )}
-                </Button>
-            </Box>
-        </Flex>
-    );
+         {/* wishlist icon */}
+         <Box onClick={addToWishListHandler}>
+            <Button sx={cartIconBtnProp} _hover={hoverBtnProp}>
+               {isWishlist(newItem.id) ? (
+                  <FaHeart size={20} />
+               ) : (
+                  <FiHeart size={20} />
+               )}
+            </Button>
+         </Box>
+      </Flex>
+   );
 };
 
 export default Buttons;
