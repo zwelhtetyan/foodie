@@ -26,10 +26,7 @@ const Header = () => {
 
    const navigate = useNavigate();
 
-   const totalAmount = cartItems.reduce(
-      (amount, item) => amount + item.quantity,
-      0
-   );
+   const totalItem = cartItems.reduce((prev, item) => prev + item.quantity, 0);
 
    const totalWishlist = wishlist.length;
 
@@ -124,7 +121,7 @@ const Header = () => {
                   >
                      <BsCartDash size={22} cursor={'pointer'} />
                      <NotiBadge
-                        val={totalAmount > 0 ? totalAmount : ''}
+                        val={totalItem > 0 ? totalItem : ''}
                         className='cartNotiBadge'
                      />
                   </Box>
