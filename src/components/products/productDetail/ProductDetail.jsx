@@ -1,19 +1,21 @@
 import React from 'react';
 import { Badge, Box, Flex, Image, Text, VStack } from '@chakra-ui/react';
 import { useSelector } from 'react-redux';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import AccordionContainer from './Accordion';
 import Buttons from './Buttons';
 import BackBtn from '../../../utilities/BackBtn';
 import { titleShorter } from '../../../utilities/titleShorter';
 import useSkeleton from '../../../hooks/useSkeleton';
 import Error from '../../../pages/Error';
+import { useEffect } from 'react';
 
 const ProductDetail = () => {
    const { products } = useSelector((state) => state.productUI);
    const { wishlist } = useSelector((state) => state.wishList);
    const { _id } = useParams();
    const navigate = useNavigate();
+   const location = useLocation();
 
    // skeleton
    const { productDetailSkeleton } = useSkeleton();
@@ -31,7 +33,7 @@ const ProductDetail = () => {
    };
 
    //when this component mount
-   window.scrollTo(0, 0);
+   useEffect(() => window.scrollTo(0, 0), [location]);
 
    return (
       <>
