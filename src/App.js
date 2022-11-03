@@ -28,7 +28,7 @@ const App = () => {
    const sendRequest = useSendDataToFirebase();
 
    useEffect(() => {
-      if (initialRender) {
+      if (initialRender || isAuthenticated) {
          initialRender = false;
          dispatch(fetchProductData()); // fetch product from fakestore api
 
