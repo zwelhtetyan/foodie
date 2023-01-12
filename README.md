@@ -22,4 +22,4 @@
 
 ### Credit
 
-I used slide photos and inspired some layout design from 👉 https://haru-fashion.vercel.app/ and code on my own.
+I used slide photos from 👉 https://haru-fashion.vercel.app/ and code on my own.
