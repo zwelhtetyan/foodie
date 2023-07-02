@@ -1,4 +1,4 @@
-## An E-commerce Application using React + Firebase and more
+## Mini e-commerce application using React + Firebase and more...
 
 ![Image description](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/vsiggbyifofmxqkzg6ws.png)
 
@@ -8,18 +8,18 @@
 
 ### Features
 
--  Add to cart
--  Add to wishlist 
--  View product Detail
--  Search porducts
--  google authentication
+- [x] Add to cart
+- [x] Add to wishlist 
+- [x] View product Detail
+- [x] Search porducts
+- [x] google authentication
 
 ### Tech stacks
 
--  React
--  Firebase
--  Chakra UI
+- [x] React
+- [x] Firebase
+- [x] Chakra UI
 
 ### Credit
 
-I used slide photos from 👉 https://haru-fashion.vercel.app/ and code on my own.
+I used slide photos from 👉 https://haru-fashion.vercel.app.
